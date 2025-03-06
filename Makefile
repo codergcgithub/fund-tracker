@@ -6,14 +6,14 @@ create-venv:
 	uv venv --python $(PYTHON_VERSION)
 	source $(VENV_BIN)/activate
 	uv pip install -r requirements-dev.txt
+	uv add --requirements requirements.txt
 
 test: create-venv
 	uv sync --extra test
-	uv run pytest --tb=line ./tests
+	PYTHONPATH=$(shell pwd) uv run pytest --tb=line .
 
 install: create-venv
 	uv pip compile pyproject.toml
-	#uv sync
 
 lint: 
-	ruff check --select=ALL ./app ./tests
+	ruff check --select=ALL 

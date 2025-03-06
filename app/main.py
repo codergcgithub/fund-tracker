@@ -1,6 +1,10 @@
 from typing import List
-
-from fastapi import FastAPI, HTTPException
+import logging
+from app.core.middleware import logging_middleware
+from fastapi import FastAPI, HTTPException, Request, Response
+from starlette.background import BackgroundTask
 from pydantic import BaseModel
 
 app = FastAPI(title="FundTracker API")
+app.middleware("http")(logging_middleware)
+

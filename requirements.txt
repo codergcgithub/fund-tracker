@@ -3,3 +3,5 @@ uvicorn
 typing
 pydantic
 python-dotenv
+finnhub-python
+pandas
