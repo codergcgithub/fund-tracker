@@ -12,13 +12,13 @@ def timed_lru_cache(seconds: int, maxsize: int = 128):
     def wrapper_cache(func):
         func = lru_cache(maxsize=maxsize)(func)
         func.lifetime = timedelta(seconds=seconds)
-        func.expiration = datetime.now(datetime.timezone.utc) + func.lifetime
+        func.expiration = datetime.now() + func.lifetime
 
         @wraps(func)
         def wrapped_func(*args, **kwargs):
-            if datetime.now(datetime.timezone.utc) >= func.expiration:
+            if datetime.now() >= func.expiration:
                 func.cache_clear()
-                func.expiration = datetime.now(datetime.timezone.utc) + func.lifetime
+                func.expiration = datetime.now() + func.lifetime
             return func(*args, **kwargs)
 
         return wrapped_func

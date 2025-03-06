@@ -1,7 +1,7 @@
 from ..mds_base import MarketDataService
 from dotenv import load_dotenv
 import os
-
+from app.utils.caching import timed_lru_cache
 import finnhub
 
 
@@ -20,13 +20,19 @@ class FinnhubService(MarketDataService):
     def connect(self):
         print(f"Connecting to {__name__} API...")
         pass
-
+    
+    @timed_lru_cache(60)
     def get_price(self, symbol: str) -> float:
         print(f"Retrieving quote for {symbol} from {__name__}...")
-        data = self.client.quote(str)
-        if "c" in data and data["c"]:
-            return float(data["c"])
-        else:
+        data = self.client.quote(symbol)
+        print(data)
+        try:
+            if "c" in data and data["c"]:
+                return float(data["c"])
+            else:
+                return None
+        except Exception as e:
+            print(f"Error retrieving price for {symbol} from {__name__}: {e}")
             return None
 
     def get_historical_data(self, symbol: str, start_date: str, end_date: str):

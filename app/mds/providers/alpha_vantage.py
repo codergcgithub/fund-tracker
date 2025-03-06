@@ -2,6 +2,8 @@ from ..mds_base import MarketDataService
 from dotenv import load_dotenv
 import os
 import requests
+from app.utils.caching import timed_lru_cache
+
 
 load_dotenv()
 
@@ -19,6 +21,7 @@ class AlphaVantageService(MarketDataService):
         print(f"Connecting to {__name__} API...")
         pass
 
+    @timed_lru_cache(60)
     def get_price(self, symbol: str) -> float:
         print(f"Retrieving quote for {symbol} from {__name__}...")
         url = (
@@ -26,6 +29,7 @@ class AlphaVantageService(MarketDataService):
         )
         res = requests.get(url)
         data = res.json()
+        print(data)
         if "Global Quote" in data and data["Global Quote"]:
             return float(data["Global Quote"]["05. price"])
         else:
