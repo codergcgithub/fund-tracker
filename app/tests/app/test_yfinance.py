@@ -1,10 +1,10 @@
 import pytest
 from unittest.mock import patch
-from app.mds.providers.yfinance import yfinanceService
+from app.mds.providers.yfinance import YFinanceService
 
 @pytest.fixture
 def yfinance_service():
-    return yfinanceService()
+    return YFinanceService()
 
 def test_connect(yfinance_service):
     with patch('builtins.print') as mocked_print:
