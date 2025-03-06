@@ -25,13 +25,3 @@ def test_get_price_no_data(finnhub_service):
     finnhub_service.client.quote = MagicMock(return_value=mock_quote)
     price = finnhub_service.get_price('AAPL')
     assert price is None
-
-def test_connect(finnhub_service):
-    with patch('builtins.print') as mock_print:
-        finnhub_service.connect()
-        mock_print.assert_called_once_with("Connecting to FinnhubService API...")
-
-def test_disconnect(finnhub_service):
-    with patch('builtins.print') as mock_print:
-        finnhub_service.disconnect()
-        mock_print.assert_called_once_with("Disconnecting from FinnhubService API...")

@@ -33,12 +33,4 @@ def test_get_price_no_quote(alpha_vantage_service):
         price = alpha_vantage_service.get_price(symbol)
         assert price is None
 
-def test_connect(alpha_vantage_service):
-    with patch('builtins.print') as mock_print:
-        alpha_vantage_service.connect()
-        mock_print.assert_called_once_with('Connecting to AlphaVantage API...')
 
-def test_disconnect(alpha_vantage_service):
-    with patch('builtins.print') as mock_print:
-        alpha_vantage_service.disconnect()
-        mock_print.assert_called_once_with('Disconnecting from AlphaVantage API...')

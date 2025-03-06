@@ -4,4 +4,7 @@ typing
 pydantic
 python-dotenv
 finnhub-python
+yfinance
 pandas
+pydantic-settings
+python-multipart

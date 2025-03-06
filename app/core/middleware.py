@@ -1,6 +1,6 @@
 
 
-from fastapi import FastAPI, HTTPException, Request, Response
+from fastapi import Request, Response
 from starlette.background import BackgroundTask
 
 from app.core.logging_config import log_request_info

@@ -16,11 +16,11 @@ class AlphaVantageService(MarketDataService):
             raise ValueError("API key not found for".join(__name__))
 
     def connect(self):
-        print("Connecting to AlphaVantage API...")
+        print(f"Connecting to {__name__} API...")
         pass
 
     def get_price(self, symbol: str) -> float:
-        print(f"Retrieving quote for {symbol} from AlphaVantage...")
+        print(f"Retrieving quote for {symbol} from {__name__}...")
         url = (
             self.baseurl + f"function=GLOBAL_QUOTE&symbol={symbol}&apikey={self.apikey}"
         )
@@ -32,9 +32,9 @@ class AlphaVantageService(MarketDataService):
             return None
 
     def get_historical_data(self, symbol: str, start_date: str, end_date: str):
-        print(f"Retrieving historical data for {symbol} from AlphaVantage...")
+        print(f"Retrieving historical data for {symbol} from {__name__}...")
         pass
 
     def disconnect(self):
-        print("Disconnecting from AlphaVantage API...")
+        print(f"Disconnecting from {__name__} API...")
         pass
