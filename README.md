@@ -7,11 +7,21 @@ preferably using the install script
 
 `curl -LsSf https://astral.sh/uv/install.sh | sh` 
 
-Alternatively using
+Alternatively using =>
 `pip install uv`
 
-Build 
+Build =>
 `make install`
+
+Activate the virtual environment 
+
+`cd <Project folder>` 
+
+`source .venv/bin/activate`
+
+Copy the example env file as .env and change settings as needed
+
+`cp .env.example .env`
 
 Run the local server interactively
 
